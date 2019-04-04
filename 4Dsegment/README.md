@@ -1,9 +1,9 @@
 # Deep learning cardiac motion analysis for human survival prediction (4D*survival*)
-![4Dsurvival Network Architecture](data/DAE3.png)
 
-The code in this repository implements 4D*survival*, a network for carrying out classification/prediction using 3D motion input data. The present implementation was trained using MRI-derived heart motion data and survival outcomes on pulmonary hypertension patients. 
+[https://github.com/UK-Digital-Heart-Project/4Dsegment](4D*Segment*) is a companion repo for 4D*survival*. It provides a pipeline for processing raw cardiac MRI data into 3D motion meshes that serve as the inputs to the 4D*survival* pipeline. It carries out segmentation (deep learning), non-rigid co-registration, mesh generation and motion tracking using raw grey-scale cardiac MRI data in NIfTI format. 
 
 # Overview
+Herein, we show how to run 4D*survival* on the output of 4D*Segment*.
 The files in this repository are organized into 3 directories:
 * [code](code) : contains base functions for fitting the 2 types of statistical models used in our paper: 4D*survival* (supervised denoising autoencoder for survival outcomes) and a penalized Cox Proportional Hazards regression model.
 * [demo](demo) : contains functions for the statistical analyses carried out in our paper:
