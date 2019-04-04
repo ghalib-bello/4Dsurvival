@@ -1,6 +1,6 @@
 # Deep learning cardiac motion analysis for human survival prediction (4D*survival*)
 
-[4D*Segment*](https://github.com/UK-Digital-Heart-Project/4Dsegment) is a companion repo for 4D*survival*. It provides a pipeline for processing raw cardiac MRI data into 3D motion meshes that serve as the inputs to the 4D*survival* pipeline. It carries out segmentation (deep learning), non-rigid co-registration, mesh generation and motion tracking using raw grey-scale cardiac MRI data in NIfTI format. 
+[4D*Segment*](https://github.com/UK-Digital-Heart-Project/4Dsegment) is the companion repo for 4D*survival*. It provides a pipeline for processing raw cardiac MRI data into 3D motion meshes that serve as the inputs to the 4D*survival* pipeline. It carries out segmentation (deep learning), non-rigid co-registration, mesh generation and motion tracking using raw grey-scale cardiac MRI data in NIfTI format. 
 
 # Overview
 Herein, we show how to run 4D*survival* on the output of 4D*Segment*. If 4D*Segment* runs successfully, there should be a `data` folder containing:
@@ -58,26 +58,28 @@ The first step would be to convert the output of 4D*Segment* into a format that 
 cd setup
 ls -l
 ```
-This should list one file: `inputdata_setup.py`. Now, run this file 
+This should list one file: `inputdata_setup.py`. Now, run this file:
+```
+python3 inputdata_setup.py /4Dsegment
+```
 
-Below we will demonstrate how to perform (within the Docker image) the following analyses:
+If all goes well, the 4D*segment* output will be transformed into a format that is ready to be fed into the 4D*Survival* prediction pipeline. 
+
+
+Now we will demonstrate how to perform the following analyses:
 - [x] Train and validate deep learning network
 
-#### Train deep learning network
+#### Train & validate deep learning network
 From the 4dSurv directory, navigate to the `demo` directory by typing:
 ```
-cd demo
+cd /4DSurv/demo
 ls -l
 ```
-The `demo_hypersearchDL.py` file should be visible. This executes a hyperparameter search (see Methods section in paper) for training of the `4Dsurvival` deep learning network. A demo of this code (which uses simulated input data) can now be run (WARNING: on most machines, this will take several hours to run):
+The `demo_validateDL.py` file should be visible. This code (which uses as input the mesh data we just processed) can now be run (WARNING: on most machines, this will take several hours to run):
 ```
-python3 demo_hypersearchDL.py
+python3 demo_validateDL.py
 ```
 
-Also under the `demo` folder, the `demo_validate.py` file should be visible. This executes the bootstrap-based approach for training and internal validation of the Cox Proportional Hazards model for conventional (volumetric) parameters. A demo of this code (which uses simulated input data) can now be run :
-```
-python3 demo_validate.py
-```
 
 ## Citation
 
