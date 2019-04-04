@@ -3,28 +3,19 @@
 [4D*Segment*](https://github.com/UK-Digital-Heart-Project/4Dsegment) is a companion repo for 4D*survival*. It provides a pipeline for processing raw cardiac MRI data into 3D motion meshes that serve as the inputs to the 4D*survival* pipeline. It carries out segmentation (deep learning), non-rigid co-registration, mesh generation and motion tracking using raw grey-scale cardiac MRI data in NIfTI format. 
 
 # Overview
-Herein, we show how to run 4D*survival* on the output of 4D*Segment*.
-The files in this repository are organized into 3 directories:
-* [code](code) : contains base functions for fitting the 2 types of statistical models used in our paper: 4D*survival* (supervised denoising autoencoder for survival outcomes) and a penalized Cox Proportional Hazards regression model.
-* [demo](demo) : contains functions for the statistical analyses carried out in our paper:
-  * Training of DL model - [demo/demo_hypersearchDL.py](demo/demo_hypersearchDL.py)
-  * Generation of Kaplan-Meier plots - [demo/demo_KMplot.py](demo/demo_KMplot.py)
-  * statistical comparison of model performance - [demo/demo_modelcomp_pvalue.py](demo/demo_modelcomp_pvalue.py)
-  * Bootstrap internal validation - [demo/demo_validate.py](demo/demo_validate.py)
-* [data](data) : contains simulated data on which functions from the `demo` directory can be run.
+Herein, we show how to run 4D*survival* on the output of 4D*Segment*. If 4D*Segment* runs successfully, there should be a `data` folder containing:
+* `subjnames.txt` : a file containing IDs of all subjects whose raw MRI data was successfully processed by the 4D*Segment* pipeline
+* subfolders labelled with subject IDs: these subfolders contain, among other things, mesh (point-wise) data for each subject
+* `matchedpointsnew.txt` : contains mapping required for mesh-downsampling (4D*survival* downsamples meshes before feeding them into the survival prediction algorithm)
 
-To run the code in the [demo](demo) directory, we provide a [Binder](https://mybinder.org/) interface (for the Jupyter notebooks) and a Docker container (for the corresponding Python scripts). Below are usage instructions:
+A CSV (comma-delimited) file containing survival outcomes should be copied into the `data` directory. This file should be named `surv_outcomes.csv` and should contain 3 labeled columns: 
+* `ID`: subject ID (should match corresponding folder names in the `data` directory)
+* `status` : dead/alive status of subject
+* `time` : observation time for subject
 
-## 1. Running Jupyter notebooks via Binder
+Next, a Docker image should be downloaded to run the prediction pipeline. This is discussed below
 
-The Jupyter notebooks in the [demo](demo) directory are hosted on Binder, which provides an interactive user interface for executing Jupyter notebooks. Click the link provided below for access:
-
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/UK-Digital-Heart-Project/4DSurv/master)
-
-
-## 2. Installation/Usage Guide for Docker Image
-
-A Docker image is available for running the code available in the [demo](demo) directory. This image contains a base Ubuntu linux operating system image set up with all the libraries required to run the code (e.g. *Tensorflow*, *Keras*, *Optunity*, etc.). The image contains all the code, as well as simulated data on which the code can be run. 
+## Installation/Usage Guide for Docker Image
 
 ### Install Docker
 Running our 4D*survival* Docker image requires installation of the Docker software, instructions are available at https://docs.docker.com/install/ 
@@ -32,29 +23,45 @@ Running our 4D*survival* Docker image requires installation of the Docker softwa
 ### Download 4D*survival* Docker image
 Once the Docker software has been installed, our 4D*survival* Docker image can be pulled from the Docker hub using the following command:
     
-    docker pull ghalibbello/4dsurvival:latest
+    docker pull ghalibbello/4dsurvival_new:latest
 
 Once the image download is complete, open up a command-line terminal. On Windows operating systems, this would be the *Command Prompt* (cmd.exe), accessible by opening the [Run Command utility](https://en.wikipedia.org/wiki/Run_command) using the shortcut key `Win`+`R` and then typing `cmd`. On Mac OS, the terminal is accessible via (Finder > Applications > Utilities > Terminal). On Linux systems, any terminal can be used.
 Once a terminal is open, running the following command:
 
     docker images
 
-should show `ghalibbello/4dsurvival` on the list of images on your local system
+should show `ghalibbello/4dsurvival_new` on the list of images on your local system
 
 ### Run 4D*survival* Docker image
+We will run the docker image and mount the `data` folder produced after running 4D*Segment* :
     
-    docker run -it ghalibbello/4dsurvival:latest /bin/bash
+    docker run -it --rm -v <4DSEgment-folder-path>/data/:/4Dsegment ghalibbello/4dsurvival_new:latest /bin/bash
 
-launches an interactive linux shell terminal that gives users access to the image's internal file system. This file system contains all the code in this repository, along with simulated data on which the code can be run.
+The launches an interactive linux shell terminal that gives users access to the image's internal file system, and mounts the aforementioned `data` directory from the local host to the `/4Dsegment` directory within the 4D*survival* docker image. 
+
 Typing 
 ```
 ls -l
 ```
-will list all the folders in the working directory of the Docker image (/4DSurv). You should see the 3 main folders `code`, `data` and `demo`, which contain the same files as the corresponding folders with the same name in this github repository.
+will list the contents of the `/4Dsegment`, showing the mount was successful. 
+Next, type the following commands:
+
+```
+cd /4DSurv
+ls -l
+```
+
+This will list all the folders in the working directory of the Docker image (/4DSurv). You should see the 4 main folders `code`, `data`, `demo` an `setup`.
+
+The first step would be to convert the output of 4D*Segment* into a format that can be fed into 4D*survival*. To do this, navigate to the `setup` directory by typing:
+```
+cd setup
+ls -l
+```
+This should list one file: `inputdata_setup.py`. Now, run this file 
 
 Below we will demonstrate how to perform (within the Docker image) the following analyses:
-- [x] Train deep learning network
-- [x] Train and validate conventional parameter model
+- [x] Train and validate deep learning network
 
 #### Train deep learning network
 From the 4dSurv directory, navigate to the `demo` directory by typing:
