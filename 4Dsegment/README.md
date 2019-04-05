@@ -35,15 +35,16 @@ should show `ghalibbello/4dsurvival_new` on the list of images on your local sys
 ### Run 4D*survival* Docker image
 We will run the docker image and mount the `data` folder produced after running 4D*Segment* :
     
-    docker run -it --rm -v <4DSEgment-folder-path>/data/:/4Dsegment ghalibbello/4dsurvival_new:latest /bin/bash
+    docker run -it --rm -v <4DSegment-folder-path>/data/:/4Dsegment_output -v <empty-results-folder>:/4DSurvival_results ghalibbello/4dsurvival_new:latest /bin/bash
 
-The launches an interactive linux shell terminal that gives users access to the image's internal file system, and mounts the aforementioned `data` directory from the local host to the `/4Dsegment` directory within the 4D*survival* docker image. 
+In the above command, `<4DSegment-folder-path>` is simply a placeholder for the directory on your local machine where the 4D*Segment* `data` folder resides. And `<empty-results-folder>` is a placeholder for an empty directory on your local machine where you would like the results of 4D*Survival* (risk score predictions, saved DL models, Kaplan-Meier plot images, text files summarizing validation results) to be saved.
+Running the above command launches an interactive linux shell terminal that gives users access to the Docker image's internal file system, and also mounts the local folders `<4DSEgment-folder-path>` and `<empty-results-folder>` onto the `/4Dsegment_output` and `/4DSurvival_results` directories within the 4D*survival* docker image. 
 
 Typing 
 ```
 ls -l
 ```
-will list the contents of the `/4Dsegment`, showing the mount was successful. 
+will list the contents of the `/4Dsegment_output`, showing the mount was successful. 
 Next, type the following commands:
 
 ```
@@ -60,7 +61,7 @@ ls -l
 ```
 This should list one file: `inputdata_setup.py`. Now, run this file:
 ```
-python3 inputdata_setup.py /4Dsegment
+python3 inputdata_setup.py /4Dsegment_output
 ```
 
 If all goes well, the 4D*segment* output will be transformed into a format that is ready to be fed into the 4D*Survival* prediction pipeline. 
@@ -68,6 +69,7 @@ If all goes well, the 4D*segment* output will be transformed into a format that 
 
 Now we will demonstrate how to perform the following analyses:
 - [x] Train and validate deep learning network
+- [x] Generate KM plot for deep learning network predictions
 
 #### Train & validate deep learning network
 From the 4dSurv directory, navigate to the `demo` directory by typing:
@@ -79,5 +81,6 @@ The `demo_validateDL.py` file should be visible. This code (which uses as input 
 ```
 python3 demo_validateDL.py
 ```
+This code will run a bootstrap validation of the DL model, and also save 
 
  
