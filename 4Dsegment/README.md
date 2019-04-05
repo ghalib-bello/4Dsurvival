@@ -5,7 +5,7 @@
 # Overview
 Herein, we show how to run 4D*survival* on the output of 4D*Segment*. If 4D*Segment* runs successfully, there should be a `data` folder containing:
 * `subjnames.txt` : a file containing IDs of all subjects whose raw MRI data was successfully processed by the 4D*Segment* pipeline
-* subfolders labelled with subject IDs: these subfolders contain, among other things, mesh (point-wise) data for each subject
+* subfolders labelled with subject IDs: these subfolders contain, among other things, mesh (point-wise) data for each subject. As the [4D*Segment*](https://github.com/UK-Digital-Heart-Project/4Dsegment) instructions indicate, the key output of the pipeline is point-wise 3D mesh data representing positions of points on the heart throughout the cardiac cycle. For each subject, this data is stored within the `motion` subfolder. This data summarizes 20 computational meshes (both vtk and txt files) for a complete cardiac cycle (20 frames). In each of 20 meshes, only spatial locations of vertices are recorded. Vertex spatial position (x, y and z) on the same row in the txt files corresponds to the same anatomical location across the cardiac cycle. *This vertex spatial position data (across 20 frames) is the input to the 4D*survival* pipeline* (note that this vertex spatial position data is first down-sampled [below] before feeding it into 4D*Survival*).
 * `matchedpointsnew.txt` : contains mapping required for mesh-downsampling (4D*survival* downsamples meshes before feeding them into the survival prediction algorithm)
 
 A CSV (comma-delimited) file containing survival outcomes should be copied into the `data` directory. This file should be named `surv_outcomes.csv` and should contain 3 labeled columns: 
