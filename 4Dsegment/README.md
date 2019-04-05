@@ -42,9 +42,10 @@ Running the above command launches an interactive linux shell terminal that give
 
 Typing 
 ```
-ls -l
+ls -l /4Dsegment_output
 ```
-will list the contents of the `/4Dsegment_output`, showing the mount was successful. 
+should list the contents of the `/4Dsegment_output`, showing the mount was successful. 
+
 Next, type the following commands:
 
 ```
