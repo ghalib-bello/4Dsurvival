@@ -72,7 +72,7 @@ Now we will demonstrate how to perform the following analyses:
 - [x] Generate KM plot for deep learning network predictions
 
 #### Train & validate deep learning network
-From the 4dSurv directory, navigate to the `demo` directory by typing:
+Navigate to the `demo` directory by typing:
 ```
 cd /4DSurv/demo
 ls -l
@@ -84,3 +84,17 @@ python3 demo_validateDL.py
 This code will run a bootstrap validation of the DL model, and save the final model (run on the full training sample). The model will be saved in the `/4DSurvival_results` shared/mounted directory, as an [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file named `saved_model__DL.h5` 
 
  
+ 
+#### Generate KM plot for deep learning network predictions
+To generate a KM Plot for the DL network, the validation step above (running `demo_validateDL.py`) must have completed successfully. This is because the output of `demo_validateDL.py` is required for KM plot generation. 
+Navigate to the `demo` directory by typing:
+```
+cd /4DSurv/demo
+ls -l
+```
+The `demo_KMplotDL.py` file should be visible. Generate KM plots by typing:
+```
+python3 demo_KMplotDL.py
+```
+This code will generate a KM plot saved in the `/4DSurvival_results` shared/mounted directory, as a PNG file named `RESULTS_demo_KMplot_DL.png` 
+
