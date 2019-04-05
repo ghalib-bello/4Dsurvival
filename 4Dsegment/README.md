@@ -23,19 +23,19 @@ Running our 4D*survival* Docker image requires installation of the Docker softwa
 ### Download 4D*survival* Docker image
 Once the Docker software has been installed, our 4D*survival* Docker image can be pulled from the Docker hub using the following command:
     
-    docker pull ghalibbello/4dsurvival_new:latest
+    docker pull ghalibbello/4dsurvival_ext:latest
 
 Once the image download is complete, open up a command-line terminal. On Windows operating systems, this would be the *Command Prompt* (cmd.exe), accessible by opening the [Run Command utility](https://en.wikipedia.org/wiki/Run_command) using the shortcut key `Win`+`R` and then typing `cmd`. On Mac OS, the terminal is accessible via (Finder > Applications > Utilities > Terminal). On Linux systems, any terminal can be used.
 Once a terminal is open, running the following command:
 
     docker images
 
-should show `ghalibbello/4dsurvival_new` on the list of images on your local system
+should show `ghalibbello/4dsurvival_ext` on the list of images on your local system
 
 ### Run 4D*survival* Docker image
 We will run the docker image and mount the `data` folder produced after running 4D*Segment* :
     
-    docker run -it --rm -v <4DSegment-folder-path>/:/4Dsegment_output -v <empty-results-folder>/:/4DSurvival_results ghalibbello/4dsurvival_new:latest /bin/bash
+    docker run -it --rm -v <4DSegment-folder-path>/:/4Dsegment_output -v <empty-results-folder>/:/4DSurvival_results ghalibbello/4dsurvival_ext:latest /bin/bash
 
 In the above command, `<4DSegment-folder-path>` is simply a placeholder for the directory on your local machine where the 4D*Segment* `data` folder resides. And `<empty-results-folder>` is a placeholder for an empty directory on your local machine where you would like the results of 4D*Survival* (risk score predictions, saved DL models, Kaplan-Meier plot images, text files summarizing validation results) to be saved.
 Running the above command launches an interactive linux shell terminal that gives users access to the Docker image's internal file system, and also mounts the local folders `<4DSEgment-folder-path>` and `<empty-results-folder>` onto the `/4Dsegment_output` and `/4DSurvival_results` directories within the 4D*survival* docker image. 
