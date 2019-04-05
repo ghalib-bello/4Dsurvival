@@ -100,3 +100,12 @@ python3 demo_KMplotDL.py
 ```
 This code will generate a KM plot saved in the `/4DSurvival_results` shared/mounted directory, as a PNG file named `RESULTS_demo_KMplot_DL.png` 
 
+
+
+
+
+
+## Ongoing
+[x] DL training on GPU
+[x] Generating predictions with saved models
+[x] Incorporation of covariate data
