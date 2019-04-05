@@ -1,6 +1,7 @@
 # Deep learning cardiac motion analysis for human survival prediction (4D*survival*)
 
-[4D*Segment*](https://github.com/UK-Digital-Heart-Project/4Dsegment) is the companion repo for 4D*survival*. It provides a pipeline for processing raw cardiac MRI data into 3D motion meshes that serve as the inputs to the 4D*survival* pipeline. It carries out segmentation (deep learning), non-rigid co-registration, mesh generation and motion tracking using raw grey-scale cardiac MRI data in NIfTI format. 
+[4D*Segment*](https://github.com/UK-Digital-Heart-Project/4Dsegment) is the companion repo for 4D*survival*. It provides a pipeline for processing raw cardiac MRI data into 3D motion meshes that serve as the inputs to the 4D*survival* pipeline. 
+If you have your raw cardiac MRI scan data in the form of grey-scale images (in NIfTI format), 4D*Segment* can carry out segmentation (deep learning -based) of these images, non-rigid co-registration, mesh generation and motion tracking. 
 
 # Overview
 Herein, we show how to run 4D*survival* on the output of 4D*Segment*. If 4D*Segment* runs successfully, there should be a `data` folder containing:
