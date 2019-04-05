@@ -10,8 +10,8 @@ Herein, we show how to run 4D*survival* on the output of 4D*Segment*. If 4D*Segm
 
 If the components listed above are all present in the 4D*Segment* output `data` directory, then the next step is to add survival outcome data to this directory. A CSV (comma-delimited) file (which should be named `surv_outcomes.csv`) containing survival outcomes should be copied into the `data` directory. This file **must** contain 3 labeled columns: 
 * `ID`: subject ID (should match corresponding folder names in the `data` directory)
-* `status` : dead/alive status of subject
-* `time` : observation time for subject
+* `status` : dead/alive status of subject at the end of observation period
+* `time` : length of observation period for subject
 
 Next, a Docker image should be downloaded to run the prediction pipeline. This is discussed below
 
