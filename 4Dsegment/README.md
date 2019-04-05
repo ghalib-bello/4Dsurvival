@@ -105,7 +105,7 @@ This code will generate a KM plot saved in the `/4DSurvival_results` shared/moun
 
 
 
-## Ongoing
-[x] DL training on GPU
-[x] Generating predictions with saved models
-[x] Incorporation of covariate data
+## Features to be introduced
+- [x] DL training on GPU
+- [x] Generating predictions with saved models
+- [x] Incorporation of covariate data
