@@ -13,6 +13,7 @@ If the components listed above are all present in the 4D*Segment* output `data` 
 * `ID`: subject ID (should match corresponding folder names in the `data` directory)
 * `status` : dead/alive status of subject at the end of observation period (dead/alive status should be coded as integers 1/0 respectively, i.e. 1: dead, 0: alive)
 * `time` : length of observation period for subject (in days)
+
 **NOTE**: The columns must be in the order `ID`, `status`, `time`
 
 Next, a Docker image should be downloaded to run the prediction pipeline. This is discussed below
