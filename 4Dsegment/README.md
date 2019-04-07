@@ -9,10 +9,11 @@ Herein, we show how to run 4D*survival* on the output of 4D*Segment*. If 4D*Segm
 * subfolders labelled with subject IDs: these subfolders contain, among other things, mesh (point-wise) data for each subject. As the [4D*Segment*](https://github.com/UK-Digital-Heart-Project/4Dsegment) instructions indicate, the key output of the pipeline is point-wise 3D mesh data representing positions of points on the heart throughout the cardiac cycle. For each subject, this data is stored within the `motion` subfolder. This data summarizes 20 computational meshes (both vtk and txt files) for a complete cardiac cycle (20 frames). In each of 20 meshes, only spatial locations of vertices are recorded. Vertex spatial position (*x*, *y* and *z*) on the same row in the txt files corresponds to the same anatomical location across the cardiac cycle. **This vertex spatial position data (across 20 frames) is the input to the 4D*Survival* pipeline** (note that we down-sample this data [see below] before feeding it into 4D*Survival*).
 * `matchedpointsnew.txt` : contains mapping required for mesh-downsampling (4D*survival* downsamples meshes before feeding them into the survival prediction algorithm).
 
-If the components listed above are all present in the 4D*Segment* output `data` directory, then the next step is to add survival outcome data to this directory. A CSV (comma-delimited) file (which should be named `surv_outcomes.csv`) containing survival outcomes should be copied into the `data` directory. This file **must** contain 3 labeled columns (see [a sample file](sample_files/surv_outcomes.csv)): 
+If the components listed above are all present in the 4D*Segment* output `data` directory, then the next step is to add survival outcome data to this directory. A CSV (comma-delimited) file (which should be named `surv_outcomes.csv`) containing survival outcomes should be copied into the `data` directory. This file **must** contain 3 labeled columns in the following order (see [a sample file](sample_files/surv_outcomes.csv)): 
 * `ID`: subject ID (should match corresponding folder names in the `data` directory)
 * `status` : dead/alive status of subject at the end of observation period (dead/alive status should be coded as integers 1/0 respectively, i.e. 1: dead, 0: alive)
 * `time` : length of observation period for subject (in days)
+**NOTE**: The columns must be in the order `ID`, `status`, `time`
 
 Next, a Docker image should be downloaded to run the prediction pipeline. This is discussed below
 
