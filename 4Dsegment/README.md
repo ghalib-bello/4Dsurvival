@@ -56,7 +56,7 @@ cd /4DSurv
 ls -l
 ```
 
-This will list all the folders in the working directory of the Docker image (/4DSurv). You should see the 4 main folders `code`, `data`, `demo` an `setup`.
+This will list all the folders in the working directory of the Docker image (`/4DSurv`). You should see the 4 main folders `code`, `data`, `demo` an `setup`.
 
 The first step would be to convert the output of 4D*Segment* into a format that can be fed into 4D*survival*. To do this, navigate to the `setup` directory by typing:
 ```
@@ -68,7 +68,7 @@ This should list one file: `inputdata_setup.py`. Now, run this file:
 python3 inputdata_setup.py /4Dsegment_output
 ```
 
-If all goes well, the 4D*segment* output will be transformed into a format that is ready to be fed into the 4D*Survival* prediction pipeline. This format takes the form of an input file written to `/4DSurv/data/inputdata_DL.pkl`. Now that we have this file, we can run the DL prediction pipeline (training/validation, KM plot generation, etc.).
+If all goes well, the 4D*segment* output will be transformed into a format that is ready to be fed into the 4D*Survival* prediction pipeline - this format takes the form of an input file written to `/4DSurv/data/inputdata_DL.pkl` (check the `/4DSurv/data` directory to make sure the file is there). Now that we have this file, we can run the DL prediction pipeline (training/validation, KM plot generation, etc.).
 
 
 Now we will demonstrate how to perform the following analyses:
