@@ -1,0 +1,7 @@
+ID,age,sex,WHOFxClass,6min_WalkingDist,mPAP,RVEF
+subject_1,42,0,3,414,51,27
+subject_2,68,0,3,460,44,34
+subject_3,61,1,4,182,53,24
+subject_4,56,0,3,268,48,28
+subject_5,38,1,2,120,60,23
+subject_6,73,1,3,96,41,37
