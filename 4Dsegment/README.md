@@ -106,14 +106,10 @@ This code will generate a KM plot saved in the `/4DSurvival_results` shared/moun
 #### Generate predictions with saved prediction models
 As described in the previous section ('**Train & validate deep learning network**'), after training and validation of the 4D*survival* deep learning model, the final trained model is saved as an HDF5 file under the `/4DSurvival_results` mounted directory. This saved 4D*survival* model can be used to generate predictions/risk scores for new patients for whom *raw* mesh motion data is available (i.e. output of 4D*Segment*). Below, we outline this process:
 
-For the new batch of patients, their raw cardiac MRI scan data (in the form of grey-scale images in NIfTI format), should have already been run through 4D*Segment*, which will carry out segmentation of these images, non-rigid co-registration, mesh generation and motion tracking. If 4D*Segment* completes successfully, it should output a `data` folder with similar contents as described above under the '**Overview**' section, i.e. (1) `subjnames.txt` (file containing IDs of all subjects whose raw MRI data was successfully processed by the 4D*Segment* pipeline); (2) subfolders labelled with subject IDs; (3) `matchedpointsnew.txt` (file containing mapping required for mesh-downsampling). Once we confirm the presence of these components, the next step would be to convert the output of 4D*Segment* into a format that can be fed into the saved 4D*survival* model to generate predictions. To do this, navigate to the `setup` directory by typing:
+For the new batch of patients, their raw cardiac MRI scan data (in the form of grey-scale images in NIfTI format), should have already been run through 4D*Segment*, which will carry out segmentation of these images, non-rigid co-registration, mesh generation and motion tracking. If 4D*Segment* completes successfully, it should output a `data` folder with similar contents as described above under the '**Overview**' section, i.e. (1) `subjnames.txt` (file containing IDs of all subjects whose raw MRI data was successfully processed by the 4D*Segment* pipeline); (2) subfolders labelled with subject IDs; (3) `matchedpointsnew.txt` (file containing mapping required for mesh-downsampling). Once we confirm the presence of these components, the next step would be to convert the output of 4D*Segment* into a format that can be fed into the saved 4D*survival* model to generate predictions. Assuming the 4D*Segment* output `data` folder was mounted on `/4Dsegment_output` and the saved model was saved in `/4DSurvival_results`, the following commands can be used:
 ```
 cd /4DSurv/setup
-ls -l
-```
-This should list one file: `inputdata_setup.py`. Now, run this file:
-```
-python3 inputdata_setup.py /4Dsegment_output
+python3 inputdata_setup.py /4Dsegment_output /4DSurvival_results/.h5
 ```
 
 If all goes well, the 4D*segment* output will be transformed into a format that is ready to be fed into the 4D*Survival* prediction pipeline - this format takes the form of an input file written to `/4DSurv/data/inputdata_DL.pkl` (check the `/4DSurv/data` directory to make sure the file is there). Now that we have this file, we can run the DL prediction pipeline (training/validation, KM plot generation, etc.).
