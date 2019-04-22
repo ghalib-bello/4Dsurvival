@@ -103,6 +103,13 @@ python3 demo_KMplotDL.py
 This code will generate a KM plot saved in the `/4DSurvival_results` shared/mounted directory, as a PNG file named `RESULTS_demo_KMplot_DL.png` 
 
 
+#### Generate predictions with saved models
+To generate a KM Plot for the DL network, the validation step above (running `demo_validateDL.py`) must have completed successfully. This is because the output of `demo_validateDL.py` is required for KM plot generation. 
+Navigate to the `demo` directory by typing:
+```
+cd /4DSurv/demo
+
+
 
 ### Features to be introduced soon..
 - [x] DL training on GPU
