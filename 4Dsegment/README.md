@@ -74,6 +74,7 @@ If all goes well, the 4D*segment* output will be transformed into a format that 
 Now we will demonstrate how to perform the following analyses:
 - [x] Train and validate deep learning network
 - [x] Generate KM plot for deep learning network predictions
+- [x] Generate predictions with saved prediction models
 
 #### Train & validate deep learning network
 Navigate to the `demo` directory by typing:
