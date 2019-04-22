@@ -70,13 +70,14 @@ python3 inputdata_setup.py /4Dsegment_output
 
 If all goes well, the 4D*segment* output will be transformed into a format that is ready to be fed into the 4D*Survival* prediction pipeline - this format takes the form of an input file written to `/4DSurv/data/inputdata_DL.pkl` (check the `/4DSurv/data` directory to make sure the file is there). Now that we have this file, we can run the DL prediction pipeline (training/validation, KM plot generation, etc.).
 
+________
 
 Now we will demonstrate how to perform the following analyses:
 - [x] Train and validate deep learning network
 - [x] Generate KM plot for deep learning network predictions
 - [x] Generate predictions with saved prediction models
 
-________
+
 #### Train & validate deep learning network
 Navigate to the `demo` directory by typing:
 ```
