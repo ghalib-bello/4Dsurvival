@@ -103,12 +103,14 @@ python3 demo_KMplotDL.py
 This code will generate a KM plot saved in the `/4DSurvival_results` shared/mounted directory, as a PNG file named `RESULTS_demo_KMplot_DL.png` 
 
 
-#### Generate predictions with saved models
-To generate a KM Plot for the DL network, the validation step above (running `demo_validateDL.py`) must have completed successfully. This is because the output of `demo_validateDL.py` is required for KM plot generation. 
-Navigate to the `demo` directory by typing:
+#### Generate predictions with saved prediction models
+As described in the previous section ('**Train & validate deep learning network**'), after training and validation of the deep learning model, the final trained model is saved as an HDF5 file under the `/4DSurvival_results` mounted directory. This saved model can be used to generate predictions/risk scores for new patients for whom *raw* mesh motion data is available (i.e. output of 4D*Segment*). Below, we outline this process:
+
+For the new batch of patients, their raw cardiac MRI scan data (in the form of grey-scale images in NIfTI format), should have already been run through 4D*Segment*, which will carry out segmentation of these images, non-rigid co-registration, mesh generation and motion tracking. If 4D*Segment* completes successfully, it should output a `data` folder with similar contents as described above under the '**Overview**' section, i.e. (1) `subjnames.txt` (file containing IDs of all subjects whose raw MRI data was successfully processed by the 4D*Segment* pipeline); (2) subfolders labelled with subject IDs; (3) `matchedpointsnew.txt` (contains mapping required for mesh-downsampling)
+
 ```
 cd /4DSurv/demo
-
+```
 
 
 ### Features to be introduced soon..
