@@ -123,9 +123,7 @@ python3 deploy_modelDL.py /4DSurvival_results/saved_model__DL.h5 /4DSurv/data/in
 The last command runs the `deploy_modelDL.py` script. The script takes 2 arguments, (1) the location of the saved model and (2) the location of the mesh motion data for the new subjects. 
 
 
-```
-cd /4DSurv/demo
-```
+This script outputs a 
 
 
 ### Features to be introduced soon..
