@@ -76,6 +76,7 @@ Now we will demonstrate how to perform the following analyses:
 - [x] Generate KM plot for deep learning network predictions
 - [x] Generate predictions with saved prediction models
 
+________
 #### Train & validate deep learning network
 Navigate to the `demo` directory by typing:
 ```
