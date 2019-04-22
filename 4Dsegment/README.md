@@ -131,7 +131,8 @@ This script outputs a file called `predictions_DLnetwork.csv` stored under `/4DS
 ________
 
 #### Covariate data
-Covariate file
+Covariate data must be structured in the form of a CSV file satisfying the following requirements (see a [sample file](sample_files/covariates_sample.csv) for an example):
+(1) first column must be named 'ID'
 
 
 
