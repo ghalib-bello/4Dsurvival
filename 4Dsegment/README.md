@@ -123,7 +123,7 @@ cd /4DSurv/demo
 ```
 python3 deploy_modelDL.py /4DSurvival_results/saved_model__DL.h5 /4DSurv/data/inputdata_DL_nooutcome.pkl
 ```
-The last command runs the `deploy_modelDL.py` script. The script takes 2 arguments, (1) the location of the saved model and (2) the location of the mesh motion data for the new subjects. 
+The last command runs the `deploy_modelDL.py` script. The script takes two arguments, (1) the location of the saved model and (2) the location of the mesh motion data for the new subjects. 
 
 
 This script outputs a file called `predictions_DLnetwork.csv` stored under `/4DSurvival_results`. This file is a CSV file with 2 columns, the first containing subject IDs and the second containing predictions/risk scores for each of the subjects.
@@ -135,10 +135,22 @@ Covariate data must be structured in the form of a CSV file satisfying the follo
 
 1. First column must be named 'ID' and contain subject IDs
 2. All covariates should be numeric. No characters should be used. Categorical variables (e.g. sex, race/ethnicity) must be coded as numerals
-⋅⋅1. first
-⋅⋅2. second
 3. The data should not contain missing or infinite values
 
+#### Train & validate deep learning network (mesh motion + covariates) 
+We recommend saving the covariate data CSV under the `data` folder. To use the covariate data in our training model, it needs to be combined with mesh motion data into a [.pkl](https://docs.python.org/3/library/pickle.html) file and saved. To do this, we run the following commands:
+
+```
+cd /4DSurv/setup
+```
+
+```
+python3 inputdata_setup.py /4Dsegment_output /4Dsegment_output/covariates.csv
+```
+
+The last command runs the `inputdata_setup.py` script. The script takes two arguments, (1) the directory into which the `data` folder (produced after running 4D*Segment*) was mounted (2) the location of the covariate data file. If the covariate data is formatted correctly (as outlined above), this script will produce a file `inputdata_DL_wcovariates.pkl` saved under the directory `/4DSurv/data`. 
+
+To train and validate the model, we then run the following commands:
 
 
 
