@@ -135,8 +135,8 @@ Covariate data must be structured in the form of a CSV file satisfying the follo
 
 1. First column must be named 'ID' and contain subject IDs
 2. All covariates should be numeric. No characters should be used. Categorical variables (e.g. sex, race/ethnicity) must be coded as numerals
-...a. first
-...b. second
+..1. first
+..2. second
 3. The data should not contain missing or infinite values
 
 
