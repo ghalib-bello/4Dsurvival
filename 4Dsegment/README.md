@@ -115,9 +115,12 @@ python3 inputdata_setup.py /4Dsegment_output
 If all goes well, `inputdata_setup.py` will output a file `inputdata_DL_nooutcome.pkl` saved to `/4DSurv/data/` (check the `/4DSurv/data` directory to make sure the file is there). This file contains 2 components: a mesh motion data matrix (containing vectorized motion data for each subject) and a list of subject IDs. The mesh motion data matrix is fed into the saved prediction model to generate predictions. Assuming the saved prediction model is stored in `/4DSurvival_results` as `saved_model__DL.h5`, we can accomplish this via the following commands:
 ```
 cd /4DSurv/demo
-python3 deploy_modelDL.py /4DSurvival_results/saved_model__DL.h5 /4DSurv/data/inputdata_DL_nooutcome.pkl
 ```
 
+```
+python3 deploy_modelDL.py /4DSurvival_results/saved_model__DL.h5 /4DSurv/data/inputdata_DL_nooutcome.pkl
+```
+The last command runs the `deploy_modelDL.py` script. The script takes 2 arguments, (1) the location of the saved model and (2) the location of the mesh motion data for the new subjects. 
 
 
 ```
