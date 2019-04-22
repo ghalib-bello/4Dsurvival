@@ -123,7 +123,7 @@ python3 deploy_modelDL.py /4DSurvival_results/saved_model__DL.h5 /4DSurv/data/in
 The last command runs the `deploy_modelDL.py` script. The script takes 2 arguments, (1) the location of the saved model and (2) the location of the mesh motion data for the new subjects. 
 
 
-This script outputs a 
+This script outputs a file called `predictions_DLnetwork.csv` stored under `/4DSurvival_results`. This file is a CSV file with 2 columns, the first containing subject IDs and the second containing predictions/risk scores for each of the subjects.
 
 
 ### Features to be introduced soon..
