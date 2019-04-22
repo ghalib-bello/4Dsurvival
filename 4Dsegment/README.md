@@ -133,8 +133,8 @@ ________
 #### Covariate data
 Covariate data must be structured in the form of a CSV file satisfying the following requirements (see a [sample file](sample_files/covariates_sample.csv) for an example):
 
-(1) first column must be named 'ID'
-(2) he
+1. first column must be named 'ID'
+2. he
 
 
 
