@@ -88,7 +88,7 @@ The `demo_validateDL.py` file should be visible. This code (which uses as input 
 ```
 python3 demo_validateDL.py
 ```
-This code will run a bootstrap-based internal validation of the DL model, and save the final model (run on the full training sample). The model will be saved in the `/4DSurvival_results` shared/mounted directory, as an [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file named `saved_model__DL.h5` 
+This code will run a bootstrap-based internal validation of the DL model, and save the final model (run on the full training sample). The model will be saved in the `/4DSurvival_results` shared/mounted directory, as an [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file named `saved_model__DL.h5` Results of the internal validation (predictive performance, etc.) are saved in the `/4DSurvival_results` shared/mounted directory under filename `RESULTS_demo_validateDL.txt`.
 
  
  
@@ -137,7 +137,7 @@ Covariate data must be structured in the form of a CSV file satisfying the follo
 2. All covariates should be numeric. No characters should be used. Categorical variables (e.g. sex, race/ethnicity) must be coded as numerals
 3. The data should not contain missing or infinite values
 
-#### Train & validate deep learning network (mesh motion + covariates) 
+#### Train & validate deep learning network (mesh motion + covariates) and generate Kaplan-Meier plots
 We recommend saving the covariate data CSV under the `data` folder. To use the covariate data in our training model, it needs to be combined with mesh motion data into a [.pkl](https://docs.python.org/3/library/pickle.html) file and saved. To do this, we run the following commands:
 
 ```
@@ -160,7 +160,10 @@ cd /4DSurv/demo
 python3 demo_validateDL_wcovs.py
 ```
 
-This code will run an internal validation of the DL model using nested cross-validation. It will save the final model (run on the full training sample) in the `/4DSurvival_results` shared/mounted directory, as an [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file named `saved_model__DL_wcovariates.h5` 
+This code will run an internal validation of the DL model using nested cross-validation. It will save the final model (run on the full training sample) in the `/4DSurvival_results` shared/mounted directory, as an [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file named `saved_model__DL_wcovariates.h5`. Results of the internal validation (predictive performance, etc.) are saved in the `/4DSurvival_results` shared/mounted directory under filename `RESULTS_demo_validateDL_wcovs.txt`.
+
+
+The nested cross-validated results
 
 
 ### Features to be introduced soon..
