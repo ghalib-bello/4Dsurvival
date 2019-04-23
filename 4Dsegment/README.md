@@ -135,7 +135,7 @@ The 4D*survival* DL model has been extended to accommodate covariates such as ag
 
 Covariate data must be structured in the form of a CSV file satisfying the following requirements (see a [sample file](sample_files/covariates_sample.csv) for an example):
 
-1. First column must be named 'ID' and contain subject IDs
+1. First column must be named 'ID' and contain subject IDs (characters or numbers). The remaining columns should contain covariate data
 2. All covariates should be numeric. No characters should be used. Categorical variables (e.g. sex, race/ethnicity) must be coded as numerals
 3. The data should not contain missing or infinite values
 
