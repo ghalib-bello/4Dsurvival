@@ -138,6 +138,7 @@ Covariate data must be structured in the form of a CSV file satisfying the follo
 1. First column must be named 'ID' and contain subject IDs (characters or numbers). The remaining columns should contain covariate data
 2. All covariates should be numeric. No characters should be used. Categorical variables (e.g. sex, race/ethnicity) must be coded as numerals
 3. The data should not contain missing or infinite values
+4. There should be no duplicate subject IDs
 
 #### Train & validate deep learning network (mesh motion + covariates) and generate Kaplan-Meier plots
 We recommend saving the covariate data CSV under the `data` folder. To use the covariate data in our training model, it needs to be combined with mesh motion data into a [.pkl](https://docs.python.org/3/library/pickle.html) file and saved. To do this, we run the following commands:
