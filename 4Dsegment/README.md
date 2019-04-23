@@ -131,6 +131,8 @@ This script outputs a file called `predictions_DLnetwork.csv` stored under `/4DS
 ________
 
 #### Covariate data
+The 4D*survival* DL model has been extended to accommodate covariates such as age, sex, WHO Functional class, mPAP, etc. These covariates can be used alongside with 3D motion information as predictors in the new model architecture. In this section, we describe the required structure of the covariate data, and how to train/validate the extended DL model. 
+
 Covariate data must be structured in the form of a CSV file satisfying the following requirements (see a [sample file](sample_files/covariates_sample.csv) for an example):
 
 1. First column must be named 'ID' and contain subject IDs
