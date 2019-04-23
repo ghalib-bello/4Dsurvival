@@ -163,7 +163,16 @@ python3 demo_validateDL_wcovs.py
 This code will run an internal validation of the DL model using nested cross-validation. It will save the final model (run on the full training sample) in the `/4DSurvival_results` shared/mounted directory, as an [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file named `saved_model__DL_wcovariates.h5`. Results of the internal validation (predictive performance, etc.) are saved in the `/4DSurvival_results` shared/mounted directory under filename `RESULTS_demo_validateDL_wcovs.txt`.
 
 
-The nested cross-validated results
+Kaplan-Meier plots can be generated from the nested cross-validated results:
+```
+cd /4DSurv/demo
+```
+
+```
+python3 demo_KMplotDL_wcovs.py
+```
+This code will generate a KM plot saved in the `/4DSurvival_results` shared/mounted directory, as a PNG file named `RESULTS_demo_KMplot_DL_wcovariates.png`
+
 
 
 ### Features to be introduced soon..
