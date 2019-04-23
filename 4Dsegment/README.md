@@ -106,10 +106,10 @@ python3 demo_KMplotDL.py
 This code will generate a KM plot saved in the `/4DSurvival_results` shared/mounted directory, as a PNG file named `RESULTS_demo_KMplot_DL.png` 
 
 
-#### Generate predictions with saved prediction models
+#### Generate predictions with saved prediction model
 As described in the previous section ('**Train & validate deep learning network**'), after training and validation of the 4D*survival* deep learning model, the final trained model is saved as an HDF5 file under the `/4DSurvival_results` mounted directory. This saved 4D*survival* model can be used to generate predictions/risk scores for new patients for whom *raw* mesh motion data is available (i.e. output of 4D*Segment*). Below, we outline this process:
 
-For the new batch of patients, their raw cardiac MRI scan data (in the form of grey-scale images in NIfTI format), should have already been run through 4D*Segment*, which will carry out segmentation of these images, non-rigid co-registration, mesh generation and motion tracking. If 4D*Segment* completes successfully, it should output a `data` folder with similar contents as described above under the '**Overview**' section, i.e. (1) `subjnames.txt` (file containing IDs of all subjects whose raw MRI data was successfully processed by the 4D*Segment* pipeline); (2) subfolders labelled with subject IDs; (3) `matchedpointsnew.txt` (file containing mapping required for mesh-downsampling). **NOTE**: since new patients are not expected to have survival outcome data, `surv_outcomes.csv` file (described above in the `Overview` section) should be absent from the `data` folder. Once we confirm all the aforementioned criteria are met, the next step would be to convert the output of 4D*Segment* into a format that can be fed into the saved 4D*survival* model to generate predictions. Assuming the 4D*Segment* output `data` folder was mounted on `/4Dsegment_output` and the saved model was saved in `/4DSurvival_results`, the following commands can be used:
+For the new batch of patients, their raw cardiac MRI scan data (in the form of grey-scale images in NIfTI format), should have already been run through 4D*Segment*, which will carry out segmentation of these images, non-rigid co-registration, mesh generation and motion tracking. If 4D*Segment* completes successfully, it should output a `data` folder with similar contents as described above under the '**Overview**' section, i.e. (1) `subjnames.txt` (file containing IDs of all subjects whose raw MRI data was successfully processed by the 4D*Segment* pipeline); (2) subfolders labelled with subject IDs; (3) `matchedpointsnew.txt` (file containing mapping required for mesh-downsampling). **NOTE**: since new patients are not expected to have survival outcome data, `surv_outcomes.csv` file (described above in the `Overview` section) should be absent from the `data` folder. Once we confirm all the aforementioned criteria are met, the next step would be to convert the output of 4D*Segment* into a format that can be fed into the saved 4D*survival* model to generate predictions. Assuming the 4D*Segment* output `data` folder was mounted on `/4Dsegment_output`, the following commands can be used:
 ```
 cd /4DSurv/setup
 python3 inputdata_setup.py /4Dsegment_output
@@ -150,7 +150,7 @@ cd /4DSurv/setup
 python3 inputdata_setup.py /4Dsegment_output /4Dsegment_output/covariates.csv
 ```
 
-The last command runs the `inputdata_setup.py` script. The script takes two arguments, (1) the directory into which the `data` folder (produced after running 4D*Segment*) was mounted (2) the location of the covariate data file. If the covariate data is formatted correctly (as outlined above), this script will produce a file `inputdata_DL_wcovariates.pkl` saved under the directory `/4DSurv/data`. 
+The last command runs the `inputdata_setup.py` script. The script takes two arguments, (1) the directory into which the `data` folder (produced after running 4D*Segment*) was mounted (2) the location of the covariate data file (in the example above, we use '/4Dsegment_output/covariates.csv' but in practice the covariates file could have any name). If the covariate data is formatted correctly (as outlined above), this script will produce a file `inputdata_DL_wcovariates.pkl` saved under the directory `/4DSurv/data`. 
 
 To train and validate the model, we then run the following commands:
 
@@ -175,9 +175,31 @@ python3 demo_KMplotDL_wcovs.py
 ```
 This code will generate a KM plot saved in the `/4DSurvival_results` shared/mounted directory, as a PNG file named `RESULTS_demo_KMplot_DL_wcovariates.png`
 
+#### Generate predictions with saved prediction model (using mesh motion + covariate data)
+As described previously, after training and validation of the extended 4D*survival* (with covariates) deep learning model, the final trained model is saved as an HDF5 file under the `/4DSurvival_results` mounted directory (filename: `saved_model__DL_wcovariates.h5`). This saved 4D*survival* model can be used to generate predictions/risk scores for new patients for whom *raw* mesh motion data and covariate data are available. First, we run the `inputdata_setup.py` script as described above:
+
+```
+cd /4DSurv/setup
+python3 inputdata_setup.py /4Dsegment_output /4Dsegment_output/covariates.csv
+```
+
+This script will produce a file saved under the directory `/4DSurv/data`. This file will be have one or two possible names:
+1. `inputdata_DL_wcovariates_nooutcome.pkl` if there is no outcome data
+2. `inputdata_DL_wcovariates.pkl`: if there is outcome data
+
+Now, the mesh motion data matrix and the covariate data can be fed into the saved prediction model to generate predictions. Assuming the saved prediction model is stored in `/4DSurvival_results` as `saved_model__DL_wcovariates.h5`, we can accomplish this via the following commands:
+```
+cd /4DSurv/demo
+```
+
+```
+python3 deploy_modelDL_wcovs.py /4DSurvival_results/saved_model__DL_wcovariates.h5 /4DSurv/data/inputdata_DL_wcovariates_nooutcome.pkl
+```
+The last command runs the `deploy_modelDL_wcovs.py` script. The script takes two arguments, (1) the location of the saved model and (2) the location of the mesh motion data for the new subjects. 
+
+
+This script outputs a file called `predictions_DLnetwork_wcovs.csv` stored under `/4DSurvival_results`. This file is a CSV file with 2 columns, the first containing subject IDs and the second containing predictions/risk scores for each of the subjects.
 
 
 ### Features to be introduced soon..
 - [x] DL training on GPU
-- [x] Generating predictions with saved models
-- [x] Incorporation of covariate data
