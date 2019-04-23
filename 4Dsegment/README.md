@@ -88,7 +88,7 @@ The `demo_validateDL.py` file should be visible. This code (which uses as input 
 ```
 python3 demo_validateDL.py
 ```
-This code will run a bootstrap validation of the DL model, and save the final model (run on the full training sample). The model will be saved in the `/4DSurvival_results` shared/mounted directory, as an [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file named `saved_model__DL.h5` 
+This code will run a bootstrap-based internal validation of the DL model, and save the final model (run on the full training sample). The model will be saved in the `/4DSurvival_results` shared/mounted directory, as an [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file named `saved_model__DL.h5` 
 
  
  
@@ -152,7 +152,15 @@ The last command runs the `inputdata_setup.py` script. The script takes two argu
 
 To train and validate the model, we then run the following commands:
 
+```
+cd /4DSurv/demo
+```
 
+```
+python3 demo_validateDL_wcovs.py
+```
+
+This code will run an internal validation of the DL model using nested cross-validation. It will save the final model (run on the full training sample) in the `/4DSurvival_results` shared/mounted directory, as an [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file named `saved_model__DL_wcovariates.h5` 
 
 
 ### Features to be introduced soon..
